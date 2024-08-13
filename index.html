@@ -47,18 +47,18 @@
     </div>
 
     <script>
-        let score = 0;
+        const API_KEY = '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';
 
         async function fetchQuestion() {
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer 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`
+                    'Authorization': `Bearer ${API_KEY}`
                 },
                 body: JSON.stringify({
                     model: "gpt-4",
-                    messages: [{role: "system", content: "Generate a simple English vocabulary question with four options (A, B, C, D) and indicate the correct answer."}]
+                    messages: [{ role: "system", content: "Generate a simple English vocabulary question with four options (A, B, C, D) and indicate the correct answer." }]
                 })
             });
             const data = await response.json();
@@ -90,7 +90,6 @@
         function checkAnswer(selected, correct) {
             if (selected === correct) {
                 document.getElementById('result').innerText = 'Correct!';
-                score++;
             } else {
                 document.getElementById('result').innerText = `Incorrect. The correct answer is ${correct}`;
             }
